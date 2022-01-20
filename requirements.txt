@@ -1,0 +1,34 @@
+appdirs==1.4.4
+beautifulsoup4==4.10.0
+brotlipy==0.7.0
+bs4==0.0.1
+certifi==2021.10.8
+cffi @ file:///Users/ktietz/Code/oss/ci_pkgs/cffi_1624487777258/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+conda==4.11.0
+conda-package-handling @ file:///Users/ktietz/demo/mc3/conda-bld/conda-package-handling_1630675621471/work
+cryptography @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/croot-cn99yw1m/cryptography_1639499039549/work
+cssselect==1.1.0
+fake-useragent==0.1.11
+idna @ file:///tmp/build/80754af9/idna_1637925883363/work
+importlib-metadata==4.10.1
+lxml==4.7.1
+parse==1.19.0
+pycosat==0.6.3
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+pyee==8.2.2
+pyOpenSSL @ file:///tmp/build/80754af9/pyopenssl_1635333100036/work
+pyppeteer==1.0.2
+pyquery==1.4.3
+PySocks @ file:///Users/ktietz/Code/oss/ci_pkgs/pysocks_1626781349491/work
+requests @ file:///opt/conda/conda-bld/requests_1641824580448/work
+requests-html==0.10.0
+ruamel-yaml-conda @ file:///Users/ktietz/demo/mc3/conda-bld/ruamel_yaml_1629464769899/work
+six @ file:///tmp/build/80754af9/six_1623709665295/work
+soupsieve==2.3.1
+tqdm @ file:///tmp/build/80754af9/tqdm_1635330843403/work
+urllib3==1.26.7
+w3lib==1.22.0
+websockets==10.1
+youtube-transcript-api==0.4.3
+zipp==3.7.0
