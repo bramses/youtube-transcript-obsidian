@@ -34,25 +34,29 @@ def extract_id_channel_and_title_from_yt5_url(url):
 
     return v_id, title, channel
 
-def generate_metadata(url, channel, title):
+def generate_metadata(url, channel, title, video_id):
     '''
     ## Metadata
     - Author: (yt_channel)
     - Full Title: (yt_title)
     - Category: #youtube_transcript
     - URL: (yt url -- iframeable)
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{video_id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     '''
 
     channel_tag = '#' + channel
 
-    return f'# {title} \n## Metadata\n- Author: {channel_tag}\n- [{title}]({url})\n- Category: #youtube_transcript\n'
+    return f'# {title} \n## Metadata\n- Author: {channel_tag}\n- Title: [{title}]({url})\n- Category: #youtube_transcript\n<iframe width="560" height="315" src="https://www.youtube.com/embed/{video_id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 
 yt_url = input('Enter the youtube url: ')
+if len(yt_url) == 0 or len(yt_url) > 150:
+    raise Exception('Please enter a valid youtube url')
 
 print('Extracting video information...')
 v_id, title, channel = extract_id_channel_and_title_from_yt5_url(yt_url)
 print('Generating metadata for Obsidian...')
-metadata = generate_metadata(yt_url, channel, title)
+metadata = generate_metadata(yt_url, channel, title, v_id)
 print('Generating transcript...')
 transcript = YouTubeTranscriptApi.get_transcript(v_id)
 print('Converting transcript to obsidian format...')
