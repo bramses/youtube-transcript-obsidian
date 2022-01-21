@@ -20,16 +20,27 @@ def convert_transcript_to_obsidian_format(video_id, transcript):
         end_time = generate_end_time(transcript[i]['start'], duration)
         start_time_url = generate_timestamp_yt_url(video_id, start_time)
         end_time_url = generate_timestamp_yt_url(video_id, end_time)
-        # print(f'[{"{:0>8}".format(str(timedelta(seconds=round(start_time))))}]({start_time_url}) -> [{"{:0>8}".format(str(timedelta(seconds=round(end_time))))}]({end_time_url}) : {transcript[i]["text"]}')
         obsidian_formatted_str += f'[{"{:0>8}".format(str(timedelta(seconds=round(start_time))))}]({start_time_url}) -> [{"{:0>8}".format(str(timedelta(seconds=round(end_time))))}]({end_time_url}) : {transcript[i]["text"]}\n'
 
     return obsidian_formatted_str
 
 def extract_id_channel_and_title_from_yt5_url(url):
-    channel = url.split('&')[1].split('=')[1]
-    v_id = url.split('=')[1].split('&')[0]
-
     res = session.get(url)
+    if len(url.split('&')) > 1: # regular url
+        channel = url.split('&')[1].split('=')[1]
+        v_id = url.split('=')[1].split('&')[0]
+    else:
+        if len(url.split('=')) > 1: # yt url no ab channel
+            v_id = url.split('=')[1]
+            channel_html = res.html.find('body')
+            if "channelId" in channel_html[0].text:
+                channel = channel_html[0].text.split('channelId')[1].strip().split('author')[1].strip().split(':')[1].strip().split(',')[0].strip().replace('"', '')
+        else: # yt share shortlink
+            v_id = url.split('be/')[1]
+            channel_html = res.html.find('body')
+            if "channelId" in channel_html[0].text:
+                channel = channel_html[0].text.split('channelId')[1].strip().split('author')[1].strip().split(':')[1].strip().split(',')[0].strip().replace('"', '')
+    
     title = res.html.xpath('.//title')[0].text
 
     return v_id, title, channel
@@ -55,6 +66,9 @@ if len(yt_url) == 0 or len(yt_url) > 150:
 
 print('Extracting video information...')
 v_id, title, channel = extract_id_channel_and_title_from_yt5_url(yt_url)
+print(f'Video ID: {v_id}')
+print(f'Title: {title}')
+print(f'Channel: {channel}')
 print('Generating metadata for Obsidian...')
 metadata = generate_metadata(yt_url, channel, title, v_id)
 print('Generating transcript...')

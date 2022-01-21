@@ -7,7 +7,7 @@ example video: https://www.bramadams.dev/slip-box/How+to+Land+a+100Kyr+Tech+Job+
 # Installation
 
 1. `git clone` this repo
-2. `pip install -r requirements.txt` in your virtual env
+2. `pip install -r requirements.txt` in your virtual env (I'm using `miniconda`)
 
 # Running
 
