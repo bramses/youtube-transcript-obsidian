@@ -42,6 +42,7 @@ def extract_id_channel_and_title_from_yt5_url(url):
                 channel = channel_html[0].text.split('channelId')[1].strip().split('author')[1].strip().split(':')[1].strip().split(',')[0].strip().replace('"', '')
     
     title = res.html.xpath('.//title')[0].text
+    channel = channel.replace(' ', '_')
 
     return v_id, title, channel
 
