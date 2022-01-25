@@ -19,8 +19,7 @@ def convert_transcript_to_obsidian_format(video_id, transcript):
         duration = transcript[i]['duration']
         end_time = generate_end_time(transcript[i]['start'], duration)
         start_time_url = generate_timestamp_yt_url(video_id, start_time)
-        end_time_url = generate_timestamp_yt_url(video_id, end_time)
-        obsidian_formatted_str += f'[{"{:0>8}".format(str(timedelta(seconds=round(start_time))))}]({start_time_url}) -> [{"{:0>8}".format(str(timedelta(seconds=round(end_time))))}]({end_time_url}) : {transcript[i]["text"]}\n'
+        obsidian_formatted_str += f'[{"{:0>8}".format(str(timedelta(seconds=round(start_time))))}]({start_time_url}) -> {"{:0>8}".format(str(timedelta(seconds=round(end_time))))} : {transcript[i]["text"]}\n'
 
     return obsidian_formatted_str
 
