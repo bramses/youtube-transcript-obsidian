@@ -1,9 +1,11 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 from datetime import timedelta
-import subprocess 
+import subprocess
+import sys
 from requests_html import HTMLSession
 session = HTMLSession()
 
+data = sys.argv[1]
 
 def generate_end_time(start_time, duration):
     return start_time + duration
@@ -60,9 +62,13 @@ def generate_metadata(url, channel, title, video_id):
 
     return f'# {title} \n## Metadata\n- Author: {channel_tag}\n- Title: [{title}]({url})\n- Category: #youtube_transcript\n<iframe width="560" height="315" src="https://www.youtube.com/embed/{video_id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 
-yt_url = input('Enter the youtube url: ')
-if len(yt_url) == 0 or len(yt_url) > 150:
-    raise Exception('Please enter a valid youtube url')
+if data:
+    yt_url = data
+else:
+    yt_url = input('Enter the youtube url: ')
+    if len(yt_url) == 0 or len(yt_url) > 150:
+        raise Exception('Please enter a valid youtube url')
+
 
 print('Extracting video information...')
 v_id, title, channel = extract_id_channel_and_title_from_yt5_url(yt_url)
