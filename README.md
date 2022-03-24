@@ -1,6 +1,6 @@
 # youtube-transcript-obsidian
 
-couldn't find an easy way to transcribe a yt video to obsidian, so i made one 
+couldn't find an easy way to transcribe a yt video to obsidian, so i made one, see `EXAMPLE.md` for an example result
 
 # Installation
 
