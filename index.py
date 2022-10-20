@@ -3,9 +3,10 @@ from datetime import timedelta
 import subprocess
 import sys
 from requests_html import HTMLSession
+import pyperclip
 session = HTMLSession()
 
-data = sys.argv[1]
+data = sys.argv[1] if len(sys.argv) > 1 else None
 
 def generate_end_time(start_time, duration):
     return start_time + duration
@@ -83,5 +84,5 @@ print('Converting transcript to obsidian format...')
 transcript = convert_transcript_to_obsidian_format(v_id, transcript)
 
 print('Copying to clipboard...')
-subprocess.run("pbcopy", universal_newlines=True, input=metadata + '\n\n\n' + transcript)
+pyperclip.copy(metadata + '\n\n\n' + transcript)
 print('Done copying to clipboard!')
